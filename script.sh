@@ -10,10 +10,6 @@ wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm
 # Install rpms
 rpm-ostree install /tmp/rpms/*.rpm
-# Unpin RPMFusion between rebasing
-rpm-ostree update \
-    --uninstall rpmfusion-free-release --uninstall rpmfusion-nonfree-release \
-    --install rpmfusion-free-release --install rpmfusion-nonfree-release
 
 # Fetch necessary repos
 wget -P /tmp/repos \
@@ -29,7 +25,7 @@ INSTALLED_PACKAGES=(
     akmod-nvidia xorg-x11-drv-nvidia
     gnome-tweaks zsh distrobox ibus-bamboo
 )
-rpm-ostree override remove ${REMOVED_PACKAGES[@]} --install ${INSTALLED_PACKAGES[@]}
+rpm-ostree override remove ${REMOVED_PACKAGES[@]} $(printf -- "--install=%s " ${INSTALLED_PACKAGES[@]})
 
 # Post Setup
 # Blacklist Nouveau Driver
