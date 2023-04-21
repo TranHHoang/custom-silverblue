@@ -12,7 +12,7 @@ env:
 jobs:
   update-image:
     name: Build and update image on ghcr
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
