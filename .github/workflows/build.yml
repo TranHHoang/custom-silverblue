@@ -46,7 +46,7 @@ jobs:
               echo "${TAG}"
           done
 
-          echo "image_tags=${BUILD_TAGS[*]}" >> $GITHUB_OUTPUT
+          echo "image-tags=${BUILD_TAGS[*]}" >> $GITHUB_OUTPUT
 
       - name: Get upstream version
         id: upstream-ver
