@@ -9,7 +9,7 @@ wget -P /tmp/rpms \
     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${RELEASE}.noarch.rpm \
     https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${RELEASE}.noarch.rpm
 # Install rpms
-rpm-ostree install /tmp/rpms/*.rpm
+rpm-ostree install /tmp/rpms/*.rpm fedora-repos-archive # Get older kernel for NVidia
 
 # Fetch necessary repos
 wget -P /tmp/repos \
@@ -26,7 +26,3 @@ INSTALLED_PACKAGES=(
     gnome-tweaks zsh distrobox ibus-bamboo
 )
 rpm-ostree override remove ${REMOVED_PACKAGES[@]} $(printf -- "--install=%s " ${INSTALLED_PACKAGES[@]})
-
-# Post Setup
-# Blacklist Nouveau Driver
-rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1

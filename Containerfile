@@ -2,7 +2,7 @@ ARG FEDORA_MAJOR_VERSION=38
 
 FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_MAJOR_VERSION}
 
-ADD firstboot /usr/bin/silverblue-firstboot
+ADD setup /usr/bin/silverblue-setup
 ADD script.sh /tmp/script.sh
 
 RUN /tmp/script.sh
