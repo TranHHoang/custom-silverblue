@@ -97,6 +97,7 @@ fi
 
   echo "# Cleanup"
   sed -i '/@reboot \/usr\/bin\/silverblue-setup/d' /var/spool/cron/crontabs/root
+  rm "$HOME"/.config/firstboot-done
   rm /usr/bin/silverblue-setup
 ) | zenity --progress --title="Silverblue Desktop Firstboot" --percentage=0 --auto-close --no-cancel --width=300
 
