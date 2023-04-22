@@ -1,0 +1,16 @@
+ARG FEDORA_MAJOR_VERSION=38
+FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_MAJOR_VERSION}
+
+ARG AKMODS_VERSION=38
+ARG AKMODS_CACHE="ghcr.io/tranhhoang/akmods-nvidia"
+COPY --from=${AKMODS_CACHE}:${AKMODS_VERSION} / .
+
+COPY silverblue/setup /usr/bin/silverblue-setup
+COPY silverblue/build.sh /tmp/build.sh
+
+RUN /tmp/build.sh
+# Cleanup
+RUN rm -rf /tmp/* /var/*
+# Commit changes
+RUN ostree container commit
+RUN mkdir -p /var/tmp && chmod -R 1777 /var/tmp
