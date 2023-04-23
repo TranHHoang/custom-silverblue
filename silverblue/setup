@@ -67,14 +67,13 @@ fi
 
   echo "# Installing flatpaks"
   flatpaks=$(
-      com.mattjakeman.ExtensionManager
-      com.github.tchx84.Flatseal
-      com.usebottles.bottles
-      io.github.peazip.PeaZip
+    com.mattjakeman.ExtensionManager
+    com.github.tchx84.Flatseal
+    com.usebottles.bottles
+    io.github.peazip.PeaZip
   )
-  flatpaks_count=$(yq '.flatpaks[]' < /etc/ublue-recipe.yml | wc -l)
   i=0
-  for pkg in $flatpaks; do
+  for pkg in ${#flatpaks[@]}; do
       echo "# Installing ${pkg}"
       /usr/bin/flatpak install --user --noninteractive flathub $pkg
       if [ "$?" != 0 ] ; then

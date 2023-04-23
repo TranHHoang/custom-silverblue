@@ -28,10 +28,13 @@ REMOVED_PACKAGES=(
 INSTALLED_PACKAGES=(
     xorg-x11-drv-nvidia-{,power}*
     /var/cache/akmods/${NVIDIA_PACKAGE_NAME}/kmod-${NVIDIA_PACKAGE_NAME}-${KERNEL_VERSION}-${NVIDIA_AKMOD_VERSION}.fc${RELEASE}.rpm
-    gnome-tweaks zsh distrobox ibus-bamboo
+    gnome-tweaks neovim zsh distrobox ibus-bamboo
 )
 rpm-ostree override remove ${REMOVED_PACKAGES[@]}
 rpm-ostree install ${INSTALLED_PACKAGES[@]}
 
 # alternatives cannot create symlinks on its own during a container build
 ln -s /usr/bin/ld.bfd /etc/alternatives/ld && ln -s /etc/alternatives/ld /usr/bin/ld
+
+# Disable auto-update NVidia
+sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/rpmfusion-{,non}free{,-updates}.repo
