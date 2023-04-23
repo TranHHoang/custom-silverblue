@@ -38,13 +38,3 @@ ln -s /usr/bin/ld.bfd /etc/alternatives/ld && ln -s /etc/alternatives/ld /usr/bi
 
 # Disable auto-update NVidia
 sed -i 's@enabled=1@enabled=0@g' /etc/yum.repos.d/rpmfusion-{,non}free{,-updates}.repo
-
-# Remove flatpaks
-# Removing Fedora Flathub Repository
-/usr/bin/flatpak remote-delete flathub --force ||:
-# Enabling Flathub Repository
-/usr/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-# Removing all preinstalled Flatpaks
-/usr/bin/flatpak remove --noninteractive --all ||:
-# Removing Fedora Flatpak Repository
-/usr/bin/flatpak remote-delete fedora --force ||:

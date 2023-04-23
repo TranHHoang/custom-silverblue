@@ -1,7 +1,7 @@
 name: build-silverblue
 on:
   schedule:
-    - cron: "0 0 1 * *" # Every month
+    - cron: "0 0 * * 0" # Every week at Sunday 0:00
   push:
     branches: master
     paths-ignore:
@@ -127,7 +127,7 @@ jobs:
         run: |
           echo "IMAGE_NAME=silverblue" >> $GITHUB_ENV
 
-      - name: Generate tags
+      - name: Generate Tags
         id: generate-tags
         shell: bash
         run: |

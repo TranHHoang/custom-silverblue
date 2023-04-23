@@ -17,6 +17,16 @@ fi
 echo "# Waiting for Internet connection"
 until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
 
+# Remove flatpaks
+# Removing Fedora Flathub Repository
+/usr/bin/flatpak remote-delete flathub --force ||:
+# Enabling Flathub Repository
+/usr/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# Removing all preinstalled Flatpaks
+/usr/bin/flatpak remove --noninteractive --all ||:
+# Removing Fedora Flatpak Repository
+/usr/bin/flatpak remote-delete fedora --force ||:
+
 echo "# Installing flatpaks"
 flatpaks=(
   com.mattjakeman.ExtensionManager
