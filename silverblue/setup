@@ -23,7 +23,7 @@ until /usr/bin/ping -q -c 1 flathub.org; do sleep 1; done
 # Enabling Flathub Repository
 /usr/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 # Removing all preinstalled Flatpaks
-/usr/bin/flatpak remove --noninteractive --all ||:
+/usr/bin/flatpak remove --noninteractive --all --delete-data ||:
 # Removing Fedora Flatpak Repository
 /usr/bin/flatpak remote-delete fedora --force ||:
 
@@ -50,9 +50,11 @@ gsettings set org.freedesktop.ibus.panel.emoji hotkey '[]'
 
 echo "# Config apps"
 # Configure shell
-sudo usermod --shell $(which zsh) $USER
+usermod --shell $(which zsh) $USER
 # Install chezmoi and apply dotfiles
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply TranHHoang -b $HOME/.local/bin
+# Disable services
+systemctl disable NetworkManager-wait-online.service
 
 # Mark this job as done
 mkdir -p "$HOME"/.config

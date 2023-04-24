@@ -23,6 +23,8 @@ cp -r /tmp/repos/. /etc/yum.repos.d/
 source /var/cache/akmods/nvidia-vars
 REMOVED_PACKAGES=(
     gnome-software gnome-software-rpm-ostree gnome-classic-session gnome-tour
+    open-vm-tools-desktop open-vm-tools qemu-guest-agent spice-vdagent spice-webdavd virtualbox-guest-additions
+    gnome-shell-extension-apps-menu gnome-shell-extension-window-list gnome-shell-extension-background-logo gnome-shell-extension-launch-new-instance gnome-shell-extension-places-menu
     firefox firefox-langpacks yelp toolbox
 )
 INSTALLED_PACKAGES=(
