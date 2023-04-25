@@ -28,7 +28,7 @@ REMOVED_PACKAGES=(
     firefox firefox-langpacks yelp toolbox
 )
 INSTALLED_PACKAGES=(
-    xorg-x11-drv-nvidia-{,power}*
+    xorg-x11-drv-nvidia
     /var/cache/akmods/${NVIDIA_PACKAGE_NAME}/kmod-${NVIDIA_PACKAGE_NAME}-${KERNEL_VERSION}-${NVIDIA_AKMOD_VERSION}.fc${RELEASE}.rpm
     gnome-tweaks zsh distrobox ibus-bamboo
 )
