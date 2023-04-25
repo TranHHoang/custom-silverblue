@@ -1,10 +1,10 @@
 #!/bin/sh
 set -ouex pipefail
 
-rpm-ostree upgrade
-
 if [ ! rpm-ostree kargs | grep rd.driver.blacklist=nouveau ]; then
   rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
+  # Reinstall RPM Fusion
+  rpm-ostree update --uninstall rpmfusion-free-release --uninstall rpmfusion-nonfree-release --install rpmfusion-free-release --install rpmfusion-nonfree-release
   # This job is done
   reboot
 fi
